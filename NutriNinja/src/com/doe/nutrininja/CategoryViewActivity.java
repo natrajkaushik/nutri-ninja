@@ -1,7 +1,9 @@
-package com.example.nutrininja;
+package com.doe.nutrininja;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.doe.nutrininja.R;
 
 import android.os.Bundle;
 import android.app.Activity;

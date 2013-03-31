@@ -1,4 +1,4 @@
-package com.example.nutrininja;
+package com.doe.nutrininja;
 
 public class ItemLocation {
 	
