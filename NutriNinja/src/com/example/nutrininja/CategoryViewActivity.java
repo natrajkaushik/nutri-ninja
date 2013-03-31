@@ -8,7 +8,7 @@ import android.app.Activity;
 import android.view.Menu;
 import android.widget.ListView;
 
-public class MainActivity extends Activity {
+public class CategoryViewActivity extends Activity {
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
