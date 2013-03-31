@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:background="#B2B2B2"
+        >
+        
+
+        <TextView
+            android:id="@+id/select_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/select_category"
+            android:textSize="20dp" 
+            android:textStyle="bold"
+            >
+        </TextView>
+
+        <TextView
+            android:id="@+id/aisle_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:paddingLeft="10dp"
+            
+            android:text="@string/aisle"
+            android:textSize="20dp"
+            android:textStyle="bold"
+             >
+        </TextView>
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/items_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:stackFromBottom="false"
+            android:background="#99E6FF"
+             />
+  
+
+</LinearLayout>
