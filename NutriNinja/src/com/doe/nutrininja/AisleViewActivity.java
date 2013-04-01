@@ -2,14 +2,15 @@ package com.doe.nutrininja;
 
 import android.app.Activity;
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout.LayoutParams;
 import android.widget.ListView;
 
 public class AisleViewActivity extends Activity {
@@ -33,16 +34,29 @@ public class AisleViewActivity extends Activity {
 		// Assign adapter to ListView
 		listView.setAdapter(adapter);
 		
-		View left_aisle = findViewById(R.id.left_aisle_rectangle);
+		DisplayMetrics metrics = getResources().getDisplayMetrics();
+		Log.d(TAG, String.valueOf(metrics.densityDpi));
 		
-		Log.d("TAG", left_aisle.getBackground().getBounds().flattenToString());
+		
 		
 		
 		View left_aisle_position_marker = findViewById(R.id.left_aisle_position_marker);
-		
-		//left_aisle_position_marker.setTop(100);
+		//left_aisle_position_marker.setMinimumHeight(250);
 		left_aisle_position_marker.setVisibility(View.VISIBLE);
 		left_aisle_position_marker.setBackgroundColor(Color.RED);
+		left_aisle_position_marker.setPadding(0, 50, 0, 0);
+		 //LayoutParams layoutParams=new LayoutParams(50, 200);
+	
+		 //LayoutParams layoutParams = left_aisle_position_marker.getLayoutParams();
+		 //layoutParams.height = 200;
+		 //layoutParams.width = 50;
+		 //layoutParams.topMargin = 50;
+		 //left_aisle_position_marker.requestLayout();
+		 //left_aisle_position_marker.setLayoutParams(layoutParams);
+		 left_aisle_position_marker.requestLayout();
+		 
+		 //left_aisle_position_marker.setTop(100);
+		
 		//left_aisle_position_marker.set
 		
 		final Animation animation = new AlphaAnimation(1, 0); // Change alpha from fully visible to invisible
@@ -54,5 +68,26 @@ public class AisleViewActivity extends Activity {
 	    left_aisle_position_marker.setAnimation(animation);
 	
 	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		
+		final View left_aisle = findViewById(R.id.left_aisle_rectangle);
+		left_aisle.post(new Runnable(){
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				Log.d(TAG, "width " + left_aisle.getMeasuredWidth());
+				Log.d(TAG, "height " + left_aisle.getMeasuredHeight());
+			}
+			
+		});
+		
+		//Log.d(TAG, String.valueOf(left_aisle.getHeight()));
+	}
+	
+	
 
 }

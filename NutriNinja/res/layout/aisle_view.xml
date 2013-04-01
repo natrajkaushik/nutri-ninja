@@ -66,12 +66,19 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/rectangle" />
 
+			<FrameLayout
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			     >
+			
             <View
                 android:id="@+id/left_aisle_position_marker"
                 android:layout_width="50dp"
                 android:layout_height="100dp"
-                android:visibility="invisible"
-                android:background="@drawable/rectangle" />
+               
+                android:background="@drawable/rectangle"
+                android:visibility="invisible" />
+            </FrameLayout>
         </FrameLayout>
 
         <ListView
@@ -91,13 +98,16 @@
             android:background="@drawable/rectangle" />
     </RelativeLayout>
 
-    <RelativeLayout
+    <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#B2B2B2" >
+        android:background="#B2B2B2"
+        android:visibility="visible"
+        android:orientation="horizontal"
+         >
 
-        <TextView
+        <Button
             android:id="@+id/back_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -106,13 +116,12 @@
             android:text="@string/back"
             android:textSize="20dp"
             android:textStyle="bold" >
-        </TextView>
+        </Button>
 
-        <TextView
+        <Button
             android:id="@+id/details_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="4dp"
             android:layout_marginRight="10dp"
@@ -121,7 +130,7 @@
             android:text="@string/details"
             android:textSize="20dp"
             android:textStyle="bold" >
-        </TextView>
-    </RelativeLayout>
+        </Button>
+    </LinearLayout>
 
 </LinearLayout>
