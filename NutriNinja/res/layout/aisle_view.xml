@@ -56,17 +56,39 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-     
-        
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <View
+                android:id="@+id/left_aisle_rectangle"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/rectangle" />
+
+            <View
+                android:id="@+id/left_aisle_position_marker"
+                android:layout_width="50dp"
+                android:layout_height="100dp"
+                android:visibility="invisible"
+                android:background="@drawable/rectangle" />
+        </FrameLayout>
+
         <ListView
             android:id="@+id/brand_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:stackFromBottom="false" 
             android:layout_marginLeft="70dp"
             android:layout_marginRight="70dp"
             android:background="#CCFF99"
-            />
+            android:stackFromBottom="false" />
+
+        <View
+            android:id="@+id/right_aisle_rectangle"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/rectangle" />
     </RelativeLayout>
 
     <RelativeLayout

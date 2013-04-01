@@ -14,6 +14,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class CategoryViewActivity extends Activity {
+	public static final String TAG = "CATEGORY_VIEW_ACTIVITY";
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class CategoryViewActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int position,
 					long index) {
-				Log.d("ON_CLICK_ITEM", "click");
+				Log.d(TAG, "click");
 				Intent intent = new Intent(CategoryViewActivity.this, AisleViewActivity.class);
 				startActivity(intent);
 			}
