@@ -1,6 +1,8 @@
-package com.example.nutrininja;
+package com.doe.nutrininja;
 
 import java.util.List;
+
+import com.doe.nutrininja.R;
 
 import android.content.Context;
 import android.view.LayoutInflater;
