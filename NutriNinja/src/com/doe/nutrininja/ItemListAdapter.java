@@ -48,11 +48,11 @@ public class ItemListAdapter extends BaseAdapter {
 	            convertView = inflater.inflate(R.layout.item_view, null);
 	        }
 	        
-	        TextView tvContact = (TextView) convertView.findViewById(R.id.item_name);
-	        tvContact.setText(entry.getItem());
+	        TextView item_name = (TextView) convertView.findViewById(R.id.item_name);
+	        item_name.setText(entry.getItem());
 
-	        TextView tvPhone = (TextView) convertView.findViewById(R.id.aisle);
-	        tvPhone.setText(entry.getAisle());
+	        TextView aisle = (TextView) convertView.findViewById(R.id.aisle);
+	        aisle.setText(entry.getAisle());
 
 	        return convertView;
 	}

@@ -26,12 +26,19 @@ public class CategoryViewActivity extends Activity {
 
         List<ItemLocation> itemLocations = new ArrayList<ItemLocation>();
         itemLocations.add(new ItemLocation("Milk", "3"));
+        itemLocations.add(new ItemLocation("Cheese", "3"));
         itemLocations.add(new ItemLocation("Yogurt", "3"));
         itemLocations.add(new ItemLocation("Almond Milk", "4"));
         itemLocations.add(new ItemLocation("Cashew Nuts", "5"));
         itemLocations.add(new ItemLocation("Salmon", "6"));
-        itemLocations.add(new ItemLocation("Olive Oil", "8"));
-        itemLocations.add(new ItemLocation("Bread", "9"));
+        itemLocations.add(new ItemLocation("Tuna", "6"));
+        itemLocations.add(new ItemLocation("Olive Oil", "7"));
+        itemLocations.add(new ItemLocation("Chips", "8"));
+        itemLocations.add(new ItemLocation("Juice", "9"));
+        itemLocations.add(new ItemLocation("Ginger Ale", "9"));
+        itemLocations.add(new ItemLocation("Fruits", "10"));
+        itemLocations.add(new ItemLocation("Ranch", "11"));
+        itemLocations.add(new ItemLocation("Balsamic", "11"));
 
         ItemListAdapter adapter = new ItemListAdapter(this, itemLocations);
 

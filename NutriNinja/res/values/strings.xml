@@ -13,5 +13,7 @@
     <string name="right">Right</string>
     <string name="back">Back</string>
     <string name="details">Details</string>
+    <string name="left_aisle_image">Left aisle image</string>
+    <string name="right_aisle_image">Right aisle image</string>
 
 </resources>
