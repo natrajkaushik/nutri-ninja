@@ -3,11 +3,14 @@ package com.doe.nutrininja;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.doe.nutrininja.R;
-
-import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class CategoryViewActivity extends Activity {
@@ -32,6 +35,18 @@ public class CategoryViewActivity extends Activity {
         ItemListAdapter adapter = new ItemListAdapter(this, itemLocations);
 
         list.setAdapter(adapter);
+        
+        list.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View view, int position,
+					long index) {
+				Log.d("ON_CLICK_ITEM", "click");
+				Intent intent = new Intent(CategoryViewActivity.this, AisleViewActivity.class);
+				startActivity(intent);
+			}
+        
+        });
     }
 
     @Override

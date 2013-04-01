@@ -7,10 +7,8 @@
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:background="#B2B2B2"
-        >
-        
+        android:layout_height="wrap_content"
+        android:background="#B2B2B2" >
 
         <TextView
             android:id="@+id/select_category"
@@ -19,9 +17,8 @@
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
             android:text="@string/select_category"
-            android:textSize="20dp" 
-            android:textStyle="bold"
-            >
+            android:textSize="20dp"
+            android:textStyle="bold" >
         </TextView>
 
         <TextView
@@ -34,22 +31,18 @@
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
             android:paddingLeft="10dp"
-            
             android:text="@string/aisle"
             android:textSize="20dp"
-            android:textStyle="bold"
-             >
+            android:textStyle="bold" >
         </TextView>
-        </RelativeLayout>
+    </RelativeLayout>
 
-        <ListView
-            android:id="@+id/items_list"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:stackFromBottom="false"
-            android:background="#99E6FF"
-             />
-  
+    <ListView
+        android:id="@+id/items_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#99E6FF"
+        android:stackFromBottom="false" />
 
 </LinearLayout>
