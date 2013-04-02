@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/top_level_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -10,7 +11,7 @@
         android:background="#B2B2B2" >
 
         <TextView
-            android:id="@+id/left_aisle"
+            android:id="@+id/left_aisle_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
@@ -19,7 +20,6 @@
             android:text="@string/left"
             android:textSize="20sp"
             android:textStyle="bold" >
-
         </TextView>
 
         <TextView
@@ -30,11 +30,10 @@
             android:text="Aisle 3"
             android:textSize="25sp"
             android:textStyle="bold" >
-
         </TextView>
 
         <TextView
-            android:id="@+id/right_aisle"
+            android:id="@+id/right_aisle_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -47,8 +46,10 @@
             android:textSize="20sp"
             android:textStyle="bold" >
         </TextView>
+        
     </RelativeLayout>
 
+    
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -56,17 +57,11 @@
         android:background="#000000" >
 
         <FrameLayout
+            android:id="@+id/left_aisle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp" >
-
-            <View
-                android:id="@+id/left_aisle_rectangle"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/rectangle"
-                android:visibility="invisible" />
 
             <ImageView
                 android:id="@+id/imageView1"
@@ -75,20 +70,12 @@
                 android:contentDescription="@string/left_aisle_image"
                 android:scaleType="matrix"
                 android:src="@drawable/aisle_left" />
-
-			<FrameLayout
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-			     >
 			
             <View
                 android:id="@+id/left_aisle_position_marker"
                 android:layout_width="42dp"
                 android:layout_height="100dp"
-               
-                android:background="@drawable/rectangle"
-                android:visibility="invisible" />
-            </FrameLayout>
+                android:background="@drawable/rectangle" />
         </FrameLayout>
 
         <ListView
@@ -96,33 +83,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:layout_marginLeft="70dp"
-            android:layout_marginRight="70dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
             android:layout_marginTop="5dp"
             android:background="#CCFF99"
             android:stackFromBottom="false" />
 
-        <ImageView
-            android:id="@+id/imageView2"
+        <FrameLayout
+            android:id="@+id/right_aisle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="5dp" >
+            
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:contentDescription="@string/right_aisle_image"
             android:scaleType="matrix"
             android:src="@drawable/aisle_right" />
-
-        <View
-            android:id="@+id/right_aisle_rectangle"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/rectangle"
-            android:visibility="invisible" />
+			
+		<View
+		    android:id="@+id/right_aisle_position_marker"
+		    android:layout_width="42dp"
+		    android:layout_height="100dp"
+		    android:layout_gravity="right"
+		    android:visibility="invisible"
+		    android:background="@drawable/rectangle" />
+        </FrameLayout>
 
     </RelativeLayout>
 
+    
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -150,8 +144,8 @@
             android:text="@string/details"
             android:textSize="20sp"
             android:textStyle="bold" >
-
         </Button>
+        
     </RelativeLayout>
 
 </LinearLayout>
