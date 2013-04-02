@@ -27,18 +27,25 @@ public class AisleViewActivity extends Activity {
 	private int leftAisleHeight = 0;
 	private int rightAisleHeight = 0;
 	private double densityFactor = 1f;
+	public static int brandListHeight = 0;
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		densityFactor = getResources().getDisplayMetrics().density;
 		
 		setContentView(R.layout.aisle_view);
-
+		
+		final ListView listView = (ListView) findViewById(R.id.brand_list);
+		
+		listView.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+			public void onGlobalLayout() {
+				Log.d(TAG, "Brand List Height : " + listView.getHeight());
+				brandListHeight = (int) (listView.getHeight() / densityFactor);
+			}
+		});
+		
 		String[] items = { "Prairie Farms", "Shurfresh", "Parmalat", "American Diary", "Publix", "Turner Diary"};
 		CategoryListAdapter categoryListAdapter = new CategoryListAdapter(this, Arrays.asList(items));
-		/* ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, android.R.id.text1, items); */
-		ListView listView = (ListView) findViewById(R.id.brand_list);
 		listView.setAdapter(categoryListAdapter);
 		
 		final FrameLayout left_aisle_frame = (FrameLayout) findViewById(R.id.left_aisle);
