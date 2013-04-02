@@ -1,5 +1,7 @@
 package com.doe.nutrininja;
 
+import java.util.Arrays;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,12 +35,12 @@ public class AisleViewActivity extends Activity {
 		
 		setContentView(R.layout.aisle_view);
 
-		String[] items = { "Turner Diary", "Publix", "American Diary",
-				"Parmalat", "Shurfresh", "Prairie Farms" };
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, android.R.id.text1, items);
+		String[] items = { "Prairie Farms", "Shurfresh", "Parmalat", "American Diary", "Publix", "Turner Diary"};
+		CategoryListAdapter categoryListAdapter = new CategoryListAdapter(this, Arrays.asList(items));
+		/* ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, android.R.id.text1, items); */
 		ListView listView = (ListView) findViewById(R.id.brand_list);
-		listView.setAdapter(adapter);
+		listView.setAdapter(categoryListAdapter);
 		
 		final FrameLayout left_aisle_frame = (FrameLayout) findViewById(R.id.left_aisle);
 		left_aisle_frame.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
