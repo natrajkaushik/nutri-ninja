@@ -1,5 +1,7 @@
 package com.doe.nutrininja;
 
+import java.util.Arrays;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,7 +10,6 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
-import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
@@ -20,7 +21,7 @@ public class AisleViewActivity extends Activity {
 		BLINK_ANIMATION.setDuration(500); 							// duration - half a second
 	    BLINK_ANIMATION.setInterpolator(new LinearInterpolator());	// do not alter BLINK_ANIMATION rate
 	    BLINK_ANIMATION.setRepeatCount(Animation.INFINITE);			// Repeat BLINK_ANIMATION infinitely
-	    BLINK_ANIMATION.setRepeatMode(Animation.REVERSE);				// Reverse BLINK_ANIMATION at the end
+	    BLINK_ANIMATION.setRepeatMode(Animation.REVERSE);			// Reverse BLINK_ANIMATION at the end
 	}
 	
 	private int leftAisleHeight = 0;
@@ -33,12 +34,12 @@ public class AisleViewActivity extends Activity {
 		
 		setContentView(R.layout.aisle_view);
 
-		String[] items = { "Turner Diary", "Publix", "American Diary",
-				"Parmalat", "Shurfresh", "Prairie Farms" };
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_list_item_1, android.R.id.text1, items);
+		String[] items = { "Prairie Farms", "Shurfresh", "Parmalat", "American Diary", "Publix", "Turner Diary"};
+		CategoryListAdapter categoryListAdapter = new CategoryListAdapter(this, Arrays.asList(items));
+		/* ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, android.R.id.text1, items); */
 		ListView listView = (ListView) findViewById(R.id.brand_list);
-		listView.setAdapter(adapter);
+		listView.setAdapter(categoryListAdapter);
 		
 		final FrameLayout left_aisle_frame = (FrameLayout) findViewById(R.id.left_aisle);
 		left_aisle_frame.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {

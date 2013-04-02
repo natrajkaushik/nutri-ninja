@@ -27,7 +27,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Aisle 3"
+            android:text="@string/aisle_3"
             android:textSize="25sp"
             android:textStyle="bold" >
         </TextView>
@@ -78,16 +78,40 @@
                 android:background="@drawable/rectangle" />
         </FrameLayout>
 
-        <ListView
-            android:id="@+id/brand_list"
+        <LinearLayout 
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60dp"
             android:layout_marginTop="5dp"
-            android:background="#CCFF99"
-            android:stackFromBottom="false" />
+            android:orientation="vertical" >
+            
+	        <ListView
+	            android:id="@+id/brand_list"
+	            android:layout_width="match_parent"
+	            android:layout_height="0dp"
+	            android:layout_weight="1"
+	            android:layout_marginBottom="5dp"
+	            android:background="#CCFF99"
+	            android:stackFromBottom="true" />
+	        
+	        <ImageView
+	            android:layout_width="fill_parent"
+	            android:layout_height="25dp"
+	            android:contentDescription="@string/facing_direction"
+	            android:scaleType="fitCenter"
+	            android:background="#ffffff"
+	            android:src="@drawable/facing" />
+	        
+<!-- 	        <TextView -->
+<!-- 	            android:layout_width="fill_parent" -->
+<!-- 	            android:layout_height="30dp" -->
+<!-- 	            android:background="#ffffff" -->
+<!-- 	            android:gravity="center|bottom" -->
+<!-- 	            android:text="YOU ARE FACING THIS WAY" /> -->
+            
+        </LinearLayout>
 
         <FrameLayout
             android:id="@+id/right_aisle"
@@ -117,35 +141,41 @@
     </RelativeLayout>
 
     
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:background="#B2B2B2"
-        android:visibility="visible"
-        android:orientation="horizontal" >
-
+        android:orientation="horizontal"
+        android:visibility="visible" >
+        
         <Button
+            android:background="?android:attr/selectableItemBackground"
             android:id="@+id/back_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
             android:text="@string/back"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:textStyle="bold" >
         </Button>
+        
+        <View
+            android:layout_width="2dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_vertical"
+            android:background="#90909090" />
         
         <Button
+            android:background="?android:attr/selectableItemBackground"
             android:id="@+id/details_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="30dp"
-            android:paddingLeft="10dp"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
             android:text="@string/details"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:textStyle="bold" >
         </Button>
         
-    </RelativeLayout>
+    </LinearLayout>
 
 </LinearLayout>
