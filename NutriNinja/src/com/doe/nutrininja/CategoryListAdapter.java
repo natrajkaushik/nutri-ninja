@@ -3,6 +3,7 @@ package com.doe.nutrininja;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +16,15 @@ public class CategoryListAdapter extends BaseAdapter {
 
 	private Context context;
 	private List<String> brands;
+	
+	public static double densityFactor = 1f;
 
 	public CategoryListAdapter(Context context, List<String> brands) {
 		// TODO Auto-generated constructor stub
 
 		this.context = context;
 		this.brands = brands;
+		densityFactor = context.getResources().getDisplayMetrics().density;
 	}
 
 	@Override
@@ -54,53 +58,55 @@ public class CategoryListAdapter extends BaseAdapter {
 				.findViewById(R.id.brand_item);
 		brand_name.setText(entry);
 
-		convertView.getViewTreeObserver().addOnGlobalLayoutListener(new MyGlobalLayoutListener(convertView, position));
-
+		convertView.getViewTreeObserver().addOnGlobalLayoutListener(
+				new MyGlobalLayoutListener(convertView, position));
+	
 		return convertView;
 	}
-	
-	class MyGlobalLayoutListener implements OnGlobalLayoutListener{
-		
+
+	class MyGlobalLayoutListener implements OnGlobalLayoutListener {
+
 		private View view;
 		private int position;
-		
+
 		public MyGlobalLayoutListener(View view, int position) {
 			// TODO Auto-generated constructor stub
 			this.view = view;
 			this.position = position;
 		}
-		
+
 		@Override
 		public void onGlobalLayout() {
-			// TODO Auto-generated method stub
+			double heightPercent = AisleViewActivity.brandListHeight/CategoryListAdapter.densityFactor;
 			switch (position) {
 			case 0:
 				view.setBackgroundColor(0xFFF4FFF1);
-				view.getLayoutParams().height = 30;
+				view.getLayoutParams().height = (int )(0.1 * heightPercent);
 				break;
 			case 1:
 				view.setBackgroundColor(0xFFEAFFE2);
-				view.getLayoutParams().height = 33;
+				view.getLayoutParams().height = (int )(0.12 * heightPercent);
 				break;
 			case 2:
 				view.setBackgroundColor(0xFFBFFFA9);
-				view.getLayoutParams().height = 48;
+				view.getLayoutParams().height = (int )(0.13 * heightPercent);
 				break;
 			case 3:
 				view.setBackgroundColor(0xFF94FF70);
-				view.getLayoutParams().height = 40;
+				view.getLayoutParams().height = (int )(0.15 * heightPercent);
 				break;
 			case 4:
 				view.setBackgroundColor(0xFFFFD633);
-				view.getLayoutParams().height = 100;
+				Log.d(TAG, String.valueOf((int)(0.25 * heightPercent)));
+				view.getLayoutParams().height = (int )(0.25 * heightPercent);
 				break;
 			case 5:
 				view.setBackgroundColor(0xFF2EB82E);
-				view.getLayoutParams().height = 90;
+				view.getLayoutParams().height = (int )(0.25 * heightPercent); 
 				break;
 			}
 		}
-		
+
 	}
 
 }
