@@ -149,7 +149,6 @@
         android:visibility="visible" >
         
         <Button
-            android:background="?android:attr/selectableItemBackground"
             android:id="@+id/back_button"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
@@ -166,7 +165,6 @@
             android:background="#90909090" />
         
         <Button
-            android:background="?android:attr/selectableItemBackground"
             android:id="@+id/details_button"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
