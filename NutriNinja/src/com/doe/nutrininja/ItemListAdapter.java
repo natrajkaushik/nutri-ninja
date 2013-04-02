@@ -3,15 +3,17 @@ package com.doe.nutrininja;
 import java.util.List;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 /**
- * Adapter that extends BaseAdapter and maintains a list of custom objects
- * and returns the view for each object
+ * Adapter that extends BaseAdapter and maintains a list of custom objects and
+ * returns the view for each object
  */
 public class ItemListAdapter extends BaseAdapter {
 
@@ -41,20 +43,21 @@ public class ItemListAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup viewGroup) {
-		   ItemLocation entry = itemLocations.get(position);
-	        if (convertView == null) {
-	            LayoutInflater inflater = (LayoutInflater) context
-	                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	            convertView = inflater.inflate(R.layout.item_view, null);
-	        }
-	        
-	        TextView item_name = (TextView) convertView.findViewById(R.id.item_name);
-	        item_name.setText(entry.getItem());
+		ItemLocation entry = itemLocations.get(position);
+		if (convertView == null) {
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			convertView = inflater.inflate(R.layout.item_view, null);
+		}
 
-	        TextView aisle = (TextView) convertView.findViewById(R.id.aisle);
-	        aisle.setText(entry.getAisle());
+		TextView item_name = (TextView) convertView
+				.findViewById(R.id.item_name);
+		item_name.setText(entry.getItem());
 
-	        return convertView;
+		TextView aisle = (TextView) convertView.findViewById(R.id.aisle);
+		aisle.setText(entry.getAisle());
+		
+		return convertView;
 	}
 
 }
