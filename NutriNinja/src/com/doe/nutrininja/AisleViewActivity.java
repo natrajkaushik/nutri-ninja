@@ -3,6 +3,11 @@ package com.doe.nutrininja;
 import java.util.Arrays;
 
 import android.app.Activity;
+import android.content.Context;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +20,18 @@ import android.widget.ListView;
 
 public class AisleViewActivity extends Activity {
 	public static final String TAG = "AISLE_VIEW_ACTIVITY";
+	private static final int EVENT_PERIOD = 25;
+	
+	private View left_aisle_position_marker;
+	private View right_aisle_position_marker;
+	
+	private float[] gravity = new float[3];
+	private float[] geomag = new float[3];
+	private float[] orientation = new float[3];
+	private float[] sI = new float[16];
+	private float[] sR = new float[16];
+	private int eventCount = 0;
+	private boolean facingNorth = true;
 	
 	private static final Animation BLINK_ANIMATION = new AlphaAnimation(1, 0);
 	static {
@@ -36,7 +53,6 @@ public class AisleViewActivity extends Activity {
 		setContentView(R.layout.aisle_view);
 		
 		final ListView listView = (ListView) findViewById(R.id.brand_list);
-		
 		listView.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 			public void onGlobalLayout() {
 				Log.d(TAG, "Brand List Height : " + listView.getHeight());
@@ -64,13 +80,8 @@ public class AisleViewActivity extends Activity {
 			}
 		});
 		
-		View left_aisle_position_marker = findViewById(R.id.left_aisle_position_marker);
-		left_aisle_position_marker.setVisibility(View.VISIBLE);
-	    left_aisle_position_marker.setAnimation(BLINK_ANIMATION);
-		
-		View right_aisle_position_marker = findViewById(R.id.right_aisle_position_marker);
-		right_aisle_position_marker.setVisibility(View.VISIBLE);
-	    right_aisle_position_marker.setAnimation(BLINK_ANIMATION);
+		left_aisle_position_marker = findViewById(R.id.left_aisle_position_marker);
+		right_aisle_position_marker = findViewById(R.id.right_aisle_position_marker);
 	}
 	
 	protected void onResume() {
@@ -79,11 +90,9 @@ public class AisleViewActivity extends Activity {
 		View topLevelView = findViewById(R.id.top_level_view);
 		topLevelView.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 			public void onGlobalLayout() {
-				Log.d(TAG, "Redrawing markers...");
-				View left_aisle_position_marker = findViewById(R.id.left_aisle_position_marker);
-				View right_aisle_position_marker = findViewById(R.id.right_aisle_position_marker);
-			    redrawMarker(left_aisle_position_marker, leftAisleHeight, 0.30, 0.25);
-			    redrawMarker(right_aisle_position_marker, rightAisleHeight, 0.60, 0.30);
+			    redrawMarker(left_aisle_position_marker, leftAisleHeight, 0.15, 0.25);
+			    redrawMarker(right_aisle_position_marker, rightAisleHeight, 0.60, 0.25);
+			    monitorCompassChanges();
 			}
 		});
 	}
@@ -92,5 +101,56 @@ public class AisleViewActivity extends Activity {
 		FrameLayout.LayoutParams params = ((FrameLayout.LayoutParams) marker.getLayoutParams());
 		params.height = (int) ((height * lenFraction) * densityFactor);
 		params.topMargin = (int) ((height * posFraction) * densityFactor);
+	}
+	
+	private void monitorCompassChanges() {
+		SensorManager sMan = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+		Sensor magnetField = sMan.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+		SensorEventListener magnetListener = new SensorEventListener() {
+			public void onSensorChanged(SensorEvent event) {
+				geomag = event.values.clone();
+				processSensorData();
+			}
+			public void onAccuracyChanged(Sensor sensor, int accuracy) {}
+		};
+		Sensor accelerometer = sMan.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+		SensorEventListener accListener = new SensorEventListener() {
+			public void onSensorChanged(SensorEvent event) {
+				gravity = event.values.clone();
+				processSensorData();
+			}
+			public void onAccuracyChanged(Sensor sensor, int accuracy) {}
+		};
+		sMan.registerListener(magnetListener, magnetField, SensorManager.SENSOR_DELAY_NORMAL);
+		sMan.registerListener(accListener, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+	}
+	
+	private void processSensorData() {
+		SensorManager.getRotationMatrix(sR, sI, gravity, geomag);
+		SensorManager.getOrientation(sR, orientation);
+		toggleAisleMarker();
+	}
+	
+	private void toggleAisleMarker() {
+		eventCount++;
+		if (eventCount >= EVENT_PERIOD) {
+			eventCount = 0;
+			float azimuthInRadians = Math.abs(orientation[0]);
+			if ((azimuthInRadians < 1.57) ^ facingNorth) {
+				facingNorth = !facingNorth;
+				if (facingNorth) {
+					right_aisle_position_marker.setAnimation(null);
+					right_aisle_position_marker.setVisibility(View.INVISIBLE);
+					left_aisle_position_marker.setAnimation(BLINK_ANIMATION);
+					left_aisle_position_marker.setVisibility(View.VISIBLE);
+				}
+				else {
+					left_aisle_position_marker.setAnimation(null);
+					left_aisle_position_marker.setVisibility(View.INVISIBLE);
+					right_aisle_position_marker.setAnimation(BLINK_ANIMATION);
+					right_aisle_position_marker.setVisibility(View.VISIBLE);
+				}
+			}
+		}
 	}
 }

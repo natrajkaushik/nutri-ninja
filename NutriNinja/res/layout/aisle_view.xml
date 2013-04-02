@@ -75,6 +75,7 @@
                 android:id="@+id/left_aisle_position_marker"
                 android:layout_width="42dp"
                 android:layout_height="100dp"
+                android:visibility="invisible"
                 android:background="@drawable/rectangle" />
         </FrameLayout>
 

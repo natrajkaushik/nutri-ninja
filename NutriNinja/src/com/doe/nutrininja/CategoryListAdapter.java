@@ -3,7 +3,7 @@ package com.doe.nutrininja;
 import java.util.List;
 
 import android.content.Context;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,32 +20,23 @@ public class CategoryListAdapter extends BaseAdapter {
 	public static double densityFactor = 1f;
 
 	public CategoryListAdapter(Context context, List<String> brands) {
-		// TODO Auto-generated constructor stub
-
 		this.context = context;
 		this.brands = brands;
 		densityFactor = context.getResources().getDisplayMetrics().density;
 	}
 
-	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
 		return brands.size();
 	}
 
-	@Override
 	public Object getItem(int position) {
-		// TODO Auto-generated method stub
 		return brands.get(position);
 	}
 
-	@Override
 	public long getItemId(int position) {
-		// TODO Auto-generated method stub
 		return position;
 	}
 
-	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		String entry = brands.get(position);
 		if (convertView == null) {
@@ -54,59 +45,59 @@ public class CategoryListAdapter extends BaseAdapter {
 			convertView = inflater.inflate(R.layout.brand_view, null);
 		}
 
-		TextView brand_name = (TextView) convertView
-				.findViewById(R.id.brand_item);
+		TextView brand_name = (TextView) convertView.findViewById(R.id.brand_item);
 		brand_name.setText(entry);
-
-		convertView.getViewTreeObserver().addOnGlobalLayoutListener(
-				new MyGlobalLayoutListener(convertView, position));
-	
+		brand_name.getViewTreeObserver().addOnGlobalLayoutListener(new MyGlobalLayoutListener(brand_name, position));
+		
 		return convertView;
 	}
 
 	class MyGlobalLayoutListener implements OnGlobalLayoutListener {
-
 		private View view;
 		private int position;
 
 		public MyGlobalLayoutListener(View view, int position) {
-			// TODO Auto-generated constructor stub
 			this.view = view;
 			this.position = position;
 		}
 
-		@Override
 		public void onGlobalLayout() {
-			double heightPercent = AisleViewActivity.brandListHeight/CategoryListAdapter.densityFactor;
+			double heightPercent = AisleViewActivity.brandListHeight * CategoryListAdapter.densityFactor;
+			float baseTextSize = (float) (heightPercent * 0.025f);
 			switch (position) {
 			case 0:
 				view.setBackgroundColor(0xFFF4FFF1);
 				view.getLayoutParams().height = (int )(0.1 * heightPercent);
+				((TextView) view).setTextSize(baseTextSize);
 				break;
 			case 1:
 				view.setBackgroundColor(0xFFEAFFE2);
 				view.getLayoutParams().height = (int )(0.12 * heightPercent);
+				((TextView) view).setTextSize(baseTextSize);
 				break;
 			case 2:
 				view.setBackgroundColor(0xFFBFFFA9);
 				view.getLayoutParams().height = (int )(0.13 * heightPercent);
+				((TextView) view).setTextSize(baseTextSize*1.3f);
 				break;
 			case 3:
 				view.setBackgroundColor(0xFF94FF70);
 				view.getLayoutParams().height = (int )(0.15 * heightPercent);
+				((TextView) view).setTextSize(baseTextSize*1.3f);
 				break;
 			case 4:
 				view.setBackgroundColor(0xFFFFD633);
-				Log.d(TAG, String.valueOf((int)(0.25 * heightPercent)));
 				view.getLayoutParams().height = (int )(0.25 * heightPercent);
+				((TextView) view).setGravity(Gravity.CENTER_VERTICAL);
+				((TextView) view).setTextSize(baseTextSize*2);
 				break;
 			case 5:
 				view.setBackgroundColor(0xFF2EB82E);
-				view.getLayoutParams().height = (int )(0.25 * heightPercent); 
+				view.getLayoutParams().height = (int )(0.25 * heightPercent);
+				((TextView) view).setGravity(Gravity.CENTER_VERTICAL);
+				((TextView) view).setTextSize(baseTextSize*2);
 				break;
 			}
 		}
-
 	}
-
 }
