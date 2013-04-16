@@ -3,11 +3,6 @@ package com.doe.nutrininja;
 import java.util.Arrays;
 
 import android.app.Activity;
-import android.content.Context;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,16 +10,16 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
-import android.widget.FrameLayout;
 import android.widget.ListView;
 
 public class AisleViewActivity extends Activity {
 	public static final String TAG = "AISLE_VIEW_ACTIVITY";
+	/*
 	private static final int EVENT_PERIOD = 25;
-	
+
 	private View left_aisle_position_marker;
 	private View right_aisle_position_marker;
-	
+
 	private float[] gravity = new float[3];
 	private float[] geomag = new float[3];
 	private float[] orientation = new float[3];
@@ -32,7 +27,7 @@ public class AisleViewActivity extends Activity {
 	private float[] sR = new float[16];
 	private int eventCount = 0;
 	private boolean facingNorth = true;
-	
+	*/
 	private static final Animation BLINK_ANIMATION = new AlphaAnimation(1, 0);
 	static {
 		BLINK_ANIMATION.setDuration(500); 							// duration - half a second
@@ -41,8 +36,8 @@ public class AisleViewActivity extends Activity {
 	    BLINK_ANIMATION.setRepeatMode(Animation.REVERSE);			// Reverse BLINK_ANIMATION at the end
 	}
 	
-	private int leftAisleHeight = 0;
-	private int rightAisleHeight = 0;
+	// private int leftAisleHeight = 0;
+	// private int rightAisleHeight = 0;
 	private double densityFactor = 1f;
 	public static int brandListHeight = 0;
 	
@@ -63,7 +58,7 @@ public class AisleViewActivity extends Activity {
 		String[] items = { "Prairie Farms", "Shurfresh", "Parmalat", "American Diary", "Publix", "Turner Diary"};
 		CategoryListAdapter categoryListAdapter = new CategoryListAdapter(this, Arrays.asList(items));
 		listView.setAdapter(categoryListAdapter);
-		
+		/*
 		final FrameLayout left_aisle_frame = (FrameLayout) findViewById(R.id.left_aisle);
 		left_aisle_frame.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 			public void onGlobalLayout() {
@@ -82,6 +77,7 @@ public class AisleViewActivity extends Activity {
 		
 		left_aisle_position_marker = findViewById(R.id.left_aisle_position_marker);
 		right_aisle_position_marker = findViewById(R.id.right_aisle_position_marker);
+		*/
 	}
 	
 	protected void onResume() {
@@ -90,13 +86,14 @@ public class AisleViewActivity extends Activity {
 		View topLevelView = findViewById(R.id.top_level_view);
 		topLevelView.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 			public void onGlobalLayout() {
-			    redrawMarker(left_aisle_position_marker, leftAisleHeight, 0.15, 0.25);
-			    redrawMarker(right_aisle_position_marker, rightAisleHeight, 0.60, 0.25);
-			    monitorCompassChanges();
+			    // redrawMarker(left_aisle_position_marker, leftAisleHeight, 0.15, 0.25);
+			    // redrawMarker(right_aisle_position_marker, rightAisleHeight, 0.60, 0.25);
+			    // monitorCompassChanges();
 			}
 		});
 	}
 
+	/*
 	private void redrawMarker(View marker, int height, double posFraction, double lenFraction) {
 		FrameLayout.LayoutParams params = ((FrameLayout.LayoutParams) marker.getLayoutParams());
 		params.height = (int) ((height * lenFraction) * densityFactor);
@@ -128,7 +125,7 @@ public class AisleViewActivity extends Activity {
 	private void processSensorData() {
 		SensorManager.getRotationMatrix(sR, sI, gravity, geomag);
 		SensorManager.getOrientation(sR, orientation);
-		toggleAisleMarker();
+		// toggleAisleMarker();
 	}
 	
 	private void toggleAisleMarker() {
@@ -153,4 +150,5 @@ public class AisleViewActivity extends Activity {
 			}
 		}
 	}
+	*/
 }
