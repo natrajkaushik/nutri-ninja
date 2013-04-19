@@ -3,14 +3,18 @@ package com.doe.nutrininja;
 import java.util.Arrays;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class AisleViewActivity extends Activity {
 	public static final String TAG = "AISLE_VIEW_ACTIVITY";
@@ -28,6 +32,7 @@ public class AisleViewActivity extends Activity {
 	private int eventCount = 0;
 	private boolean facingNorth = true;
 	*/
+	
 	private static final Animation BLINK_ANIMATION = new AlphaAnimation(1, 0);
 	static {
 		BLINK_ANIMATION.setDuration(500); 							// duration - half a second
@@ -46,6 +51,17 @@ public class AisleViewActivity extends Activity {
 		densityFactor = getResources().getDisplayMetrics().density;
 		
 		setContentView(R.layout.aisle_view);
+		int index = 0;
+		
+		Intent source = getIntent();
+		String title = "Item";
+		if (source.hasExtra("index")) {
+			index = source.getIntExtra("index", 0);
+			title = ItemData.ITEMS[index] + " - Aisle " + ItemData.AISLES[index];
+		}
+		Log.d(TAG, title);
+		TextView titleView = (TextView) findViewById(R.id.aisle_title);
+		titleView.setText(title);
 		
 		final ListView listView = (ListView) findViewById(R.id.brand_list);
 		listView.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
@@ -55,9 +71,21 @@ public class AisleViewActivity extends Activity {
 			}
 		});
 		
-		String[] items = { "Prairie Farms", "Shurfresh", "Parmalat", "American Diary", "Publix", "Turner Diary"};
-		CategoryListAdapter categoryListAdapter = new CategoryListAdapter(this, Arrays.asList(items));
+		CategoryListAdapter categoryListAdapter = new CategoryListAdapter(this, Arrays.asList(ItemData.BRAND_LIST[index]));
 		listView.setAdapter(categoryListAdapter);
+		listView.post(new Runnable(){
+			public void run() {
+				listView.setSelection(listView.getCount() - 1);
+			}
+		});
+		
+		Button backButton = (Button) findViewById(R.id.back_button);
+		backButton.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				finish();
+			}
+		});
+		
 		/*
 		final FrameLayout left_aisle_frame = (FrameLayout) findViewById(R.id.left_aisle);
 		left_aisle_frame.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {

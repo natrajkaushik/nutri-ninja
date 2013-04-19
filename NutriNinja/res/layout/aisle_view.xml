@@ -11,7 +11,7 @@
         android:background="#B2B2B2" >
 
         <TextView
-            android:id="@+id/aisle"
+            android:id="@+id/aisle_title"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -33,7 +33,7 @@
 	            android:id="@+id/brand_list"
 	            android:layout_width="match_parent"
 	            android:layout_height="fill_parent"
-	            android:background="#CCFF99"
+	            android:background="#CCFFFF"
 	            android:stackFromBottom="true" />
 
     </RelativeLayout>

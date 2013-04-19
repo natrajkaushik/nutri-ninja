@@ -17,12 +17,14 @@ public class CategoryListAdapter extends BaseAdapter {
 	private Context context;
 	private List<String> brands;
 	
-	public static double densityFactor = 1f;
+	protected static double densityFactor = 1f;
+	protected static int totalBrands = 0;
 
 	public CategoryListAdapter(Context context, List<String> brands) {
 		this.context = context;
 		this.brands = brands;
 		densityFactor = context.getResources().getDisplayMetrics().density;
+		totalBrands = brands.size();
 	}
 
 	public int getCount() {
@@ -64,38 +66,39 @@ public class CategoryListAdapter extends BaseAdapter {
 		public void onGlobalLayout() {
 			double heightPercent = AisleViewActivity.brandListHeight * CategoryListAdapter.densityFactor;
 			float baseTextSize = (float) (heightPercent * 0.025f);
-			switch (position) {
+			int fromBottom = CategoryListAdapter.totalBrands - position - 1;
+			switch (fromBottom) {
 			case 0:
-				view.setBackgroundColor(0xFFF4FFF1);
-				view.getLayoutParams().height = (int )(0.1 * heightPercent);
-				((TextView) view).setTextSize(baseTextSize);
+				view.setBackgroundColor(0xFF2EB82E);
+				view.getLayoutParams().height = (int )(0.25 * heightPercent);
+				((TextView) view).setGravity(Gravity.CENTER_VERTICAL);
+				((TextView) view).setTextSize(baseTextSize*2);
 				break;
 			case 1:
-				view.setBackgroundColor(0xFFEAFFE2);
-				view.getLayoutParams().height = (int )(0.12 * heightPercent);
-				((TextView) view).setTextSize(baseTextSize);
-				break;
-			case 2:
-				view.setBackgroundColor(0xFFBFFFA9);
-				view.getLayoutParams().height = (int )(0.13 * heightPercent);
-				((TextView) view).setTextSize(baseTextSize*1.3f);
-				break;
-			case 3:
-				view.setBackgroundColor(0xFF94FF70);
-				view.getLayoutParams().height = (int )(0.15 * heightPercent);
-				((TextView) view).setTextSize(baseTextSize*1.3f);
-				break;
-			case 4:
 				view.setBackgroundColor(0xFFFFD633);
 				view.getLayoutParams().height = (int )(0.25 * heightPercent);
 				((TextView) view).setGravity(Gravity.CENTER_VERTICAL);
 				((TextView) view).setTextSize(baseTextSize*2);
 				break;
-			case 5:
-				view.setBackgroundColor(0xFF2EB82E);
-				view.getLayoutParams().height = (int )(0.25 * heightPercent);
-				((TextView) view).setGravity(Gravity.CENTER_VERTICAL);
-				((TextView) view).setTextSize(baseTextSize*2);
+			case 2:
+				view.setBackgroundColor(0xFF94FF70);
+				view.getLayoutParams().height = (int )(0.15 * heightPercent);
+				((TextView) view).setTextSize(baseTextSize*1.3f);
+				break;
+			case 3:
+				view.setBackgroundColor(0xFFBFFFA9);
+				view.getLayoutParams().height = (int )(0.13 * heightPercent);
+				((TextView) view).setTextSize(baseTextSize*1.3f);
+				break;
+			case 4:
+				view.setBackgroundColor(0xFFEAFFE2);
+				view.getLayoutParams().height = (int )(0.12 * heightPercent);
+				((TextView) view).setTextSize(baseTextSize);
+				break;
+			default:
+				view.setBackgroundColor(0xFFF4FFF1);
+				view.getLayoutParams().height = (int )(0.1 * heightPercent);
+				((TextView) view).setTextSize(baseTextSize);
 				break;
 			}
 		}
